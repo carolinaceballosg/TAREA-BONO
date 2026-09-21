@@ -2,15 +2,13 @@ import { Injectable, signal, computed } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ColorService {
+  private hex = signal('000000');
 
-  private hexSignal = signal('000000');
+  r = computed(() => parseInt(this.hex().substring(0, 2), 16));
+  g = computed(() => parseInt(this.hex().substring(2, 4), 16));
+  b = computed(() => parseInt(this.hex().substring(4, 6), 16));
 
-  readonly r = computed(() => parseInt(this.hexSignal().substring(0, 2), 16));
-  readonly g = computed(() => parseInt(this.hexSignal().substring(2, 4), 16));
-  readonly b = computed(() => parseInt(this.hexSignal().substring(4, 6), 16));
-
-  convertir(hex: string) {
-    hex = hex.replace('#', '');
-    this.hexSignal.set(hex);
+  convertir(h: string) {
+    this.hex.set(h.replace('#', ''));
   }
 }
