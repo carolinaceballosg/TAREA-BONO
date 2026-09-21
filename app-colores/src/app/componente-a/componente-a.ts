@@ -1,9 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  imports: [],
   selector: 'app-componente-a',
-  styleUrl: './componente-a.css',
-  templateUrl: './componente-a.html',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './componente-a.html'
 })
-export class ComponenteA {}
+export class ComponenteA {
+  @Output() enviar = new EventEmitter<string>();
+
+  hex = new FormControl('', { nonNullable: true });
+
+  mostrar() {
+    this.enviar.emit(this.hex.value);
+  }
+}
