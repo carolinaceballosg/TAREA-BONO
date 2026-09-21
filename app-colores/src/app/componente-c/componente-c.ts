@@ -1,22 +1,23 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
+import { ColorService } from '../color.service';
 
 @Component({
   selector: 'app-componente-c',
   standalone: true,
-  templateUrl: './componente-c.html'
+  templateUrl: './componente-c.html',
+  styleUrl: './componente-c.css'
 })
-export class ComponenteC implements OnChanges {
-  @Input() r = 0;
-  @Input() g = 0;
-  @Input() b = 0;
+export class ComponenteC {
+  private servicio = inject(ColorService);
 
-  colorRgb = 'rgb(0,0,0)';
-  colorGris = 'rgb(0,0,0)';
+  colorRgb = computed(() =>
+    `rgb(${this.servicio.r()}, ${this.servicio.g()}, ${this.servicio.b()})`
+  );
 
-  ngOnChanges() {
-    this.colorRgb = `rgb(${this.r}, ${this.g}, ${this.b})`;
-
-    const gris = Math.round((this.r + this.g + this.b) / 3);
-    this.colorGris = `rgb(${gris}, ${gris}, ${gris})`;
-  }
+  colorGris = computed(() => {
+    const gris = Math.round(
+      (this.servicio.r() + this.servicio.g() + this.servicio.b()) / 3
+    );
+    return `rgb(${gris}, ${gris}, ${gris})`;
+  });
 }

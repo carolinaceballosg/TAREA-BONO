@@ -1,13 +1,10 @@
-<h1>Conversor a RGB</h1>
-
-<app-componente-a (enviar)="recibirHex($event)"></app-componente-a>
-
+<h1>Conversor Hex a RGB</h1>
+<app-componente-a></app-componente-a>
 <div class="fila">
   <div>
-    <app-componente-b nombre="R" [valor]="r"></app-componente-b>
-    <app-componente-b nombre="G" [valor]="g"></app-componente-b>
-    <app-componente-b nombre="B" [valor]="b"></app-componente-b>
+    <app-componente-b canal="R"></app-componente-b>
+    <app-componente-b canal="G"></app-componente-b>
+    <app-componente-b canal="B"></app-componente-b>
   </div>
-
-  <app-componente-c [r]="r" [g]="g" [b]="b"></app-componente-c>
+  <app-componente-c></app-componente-c>
 </div>

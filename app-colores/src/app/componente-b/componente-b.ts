@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, inject, computed } from '@angular/core';
+import { ColorService } from '../color.service';
 
 @Component({
   selector: 'app-componente-b',
@@ -7,6 +8,14 @@ import { Component, Input } from '@angular/core';
   styleUrl: './componente-b.css'
 })
 export class ComponenteB {
-  @Input() nombre = '';
-  @Input() valor = 0;
+  canal = input.required<string>();
+  private servicio = inject(ColorService);
+  valor = computed(() => {
+    switch (this.canal()) {
+      case 'R': return this.servicio.r();
+      case 'G': return this.servicio.g();
+      case 'B': return this.servicio.b();
+      default:  return 0;
+    }
+  });
 }
