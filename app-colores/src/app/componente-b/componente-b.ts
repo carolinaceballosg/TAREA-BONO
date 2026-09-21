@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  imports: [],
   selector: 'app-componente-b',
-  styleUrl: './componente-b.css',
+  standalone: true,
   templateUrl: './componente-b.html',
+  styleUrl: './componente-b.css'
 })
-export class ComponenteB {}
+export class ComponenteB {
+  @Input() nombre = '';
+  @Input() valor = 0;
+}
